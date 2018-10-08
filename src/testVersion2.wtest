@@ -1,0 +1,17 @@
+import version2.*
+
+test "al hacer una transferencia si la cuenta origen tiene saldo suficiente se le descuenta ese monto" {
+	var otraCuentaOrigen = new Cuenta(200)
+	transferencia.transferir(otraCuentaOrigen, cuentaDestino)
+	assert.equals(100, otraCuentaOrigen.saldo())
+}
+
+test "al hacer una transferencia si la cuenta origen tiene saldo suficiente, la a cuenta destino se le agrega ese monto" {
+	var otraCuentaOrigen = new Cuenta(200)
+	transferencia.transferir(otraCuentaOrigen, cuentaDestino)
+	assert.equals(110, cuentaDestino.saldo())
+}
+
+test "al hacer una transferencia si la cuenta origen no tiene saldo suficiente, tira una excepción" {
+	assert.throwsExceptionWithMessage("No hay saldo suficiente para debitar",{transferencia.transferir(cuentaOrigen, cuentaDestino)})
+}
